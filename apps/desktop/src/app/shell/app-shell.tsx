@@ -5,6 +5,7 @@ import { useSyncExternalStore } from 'react'
 import { NotificationStack } from '@/components/notifications'
 import { PaneShell } from '@/components/pane-shell'
 import { FloatingPet } from '@/components/pet/floating-pet'
+import { FloatingFace } from '@/components/face/floating-face'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import { useMediaQuery } from '@/hooks/use-media-query'
 import {
@@ -232,6 +233,9 @@ export function AppShell({
       {/* Petdex floating mascot — in-window, always-on-top, reactive to agent
           activity. Renders nothing unless a pet is installed + enabled. */}
       <FloatingPet />
+
+      {/* Vortex/PyLips floating face widget */}
+      <FloatingFace />
     </SidebarProvider>
   )
 }

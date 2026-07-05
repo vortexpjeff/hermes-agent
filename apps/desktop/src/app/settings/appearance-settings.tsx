@@ -23,6 +23,7 @@ import { $marketplaceInstalls, isUserTheme, removeUserTheme } from '@/themes/use
 
 import { MODE_OPTIONS } from './constants'
 import { PetSettings } from './pet-settings'
+import { FaceSettings } from '@/components/face/face-settings'
 import { ListRow, SectionHeading, SettingsContent } from './primitives'
 
 function ThemePreview({ name, mode }: { name: string; mode: 'light' | 'dark' }) {
@@ -467,6 +468,8 @@ export function AppearanceSettings() {
       <div className="mt-6">
         <PetSettings />
       </div>
+
+      <FaceSettings />
     </SettingsContent>
   )
 }
