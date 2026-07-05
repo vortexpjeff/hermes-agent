@@ -228,13 +228,16 @@ class PairingStore:
                     owner_info = f"owner_uid={st.st_uid} mode={oct(st.st_mode)[-4:]}"
                 except OSError:
                     owner_info = "<stat failed>"
+                # os.geteuid doesn't exist on Windows; the Docker scenario is
+                # POSIX-only, but the gateway (and this fallback) runs anywhere.
+                euid = os.geteuid() if hasattr(os, "geteuid") else "n/a"
                 logger.warning(
                     "Pairing file %s exists but is not readable as uid=%s (%s; %s). "
                     "If you ran `docker exec <container> hermes pairing approve ...` as root, "
                     "re-run with `docker exec -u hermes <container> ...` and "
                     "chown the existing file to the hermes user, or restart the "
                     "container so the entrypoint can fix ownership.",
-                    path, os.geteuid(), owner_info, e,
+                    path, euid, owner_info, e,
                 )
                 return {}
             except (json.JSONDecodeError, OSError):
